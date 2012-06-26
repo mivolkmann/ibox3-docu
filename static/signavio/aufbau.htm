@@ -1,0 +1,204 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	
+		<title>ibox 3 - Documentation Siginavio Aufbau</title>
+		<link rel="stylesheet" href="../media/css/site.css" type="text/css" media="screen" charset="utf-8" />
+
+	</head>
+	<body>
+		<div>
+			<div id="sidebar">
+				<ul>
+					<li><a href="../index.htm">Home</a></li>
+					<li><a href="index.htm">Home - Signavio</a></li>
+					<li><a href="signavio_platform.htm">Signavio - Platform</a></li>
+					<li><a href="stencilset_def.htm">Stencilset Definition</a></li>
+				</ul>
+			</div>
+			<div id="content">
+				<h1>Aufbau</h1>
+				<h1>Komponenten</h1>
+				<h2>Ordnerstruktur</h2>
+				<p>
+					<ul>
+						<li>
+							api/
+							<ul>
+								<li>Enthält Javascript zum erstellen von MashUps auf Basis der erstellten Prozesse.</li>
+							</ul>
+						</li>
+						<li>
+							build
+							<ul>
+								<li>Temporärer Ordner für den Buildprozesss</li>
+							</ul>
+						</li>
+						<li>
+							configuration
+							<ul>
+								<li>
+									Zentrale Stelle für die Konfiguration.
+									<ul>
+										<li>extension.json</li>
+										<li>plugins.xml</li>
+										<li>stencilsets.json</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							editor
+							<ul>
+								<li>
+									Enthält den Editor, mit dem jsdoc-toolkit (dieses muss dort weg...)
+								</li>
+							</ul>
+						</li>
+						<li>
+							explorer
+							<ul>
+								<li>Der Explorer zum Auswählen der Diagramme - enthält Tools zum Komprimiere des Javascritp-Codes</li>
+								<li>Der Code wie er vorliegt ist schon um seine Leerzeilen gebracht... macht es extrem hart zu lesen und zu erweritern</li>
+							</ul>
+						</li>
+						<li>
+							libs
+							<ul>
+								<li>
+									Enthält JavaScript Bibliotheken
+									<ul>
+										<li>Ext 2.0.2</li>
+										<li>prototype 1.5.1</li>
+										<li>prototype 1.6.0.3</li>
+										<li>pathparser - SVG Bibliothek (was genau sie macht weiß ich nicht)
+										<li>utils.js - Stringhandling etc.</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							platform extensions
+							<ul>
+								<li>Übernommene Teile aus dem Oryx-Editor Server</li>
+								<li>diagram core - die Grundlegende Defintion der Diagramme wie sie vom Editor kommen und dann im Server dargestellt werden</li>
+								<li>bpmn20xmlbasic - bpmn 2 spezifische Klassen - Converter etc.</li>
+							</ul>
+						</li>
+						<li>
+							<a href="signavio_platform.htm">platform</a>
+							<ul>
+								<li>Serverkomponente</li>
+								<li>handler zur Ausgabe und interaktion mit dem Editor/Explorer</li>
+								<li>filter (Servlet API) um z.B. Zugriffskontrolle zu machen</li>
+								<li>legt alles im Dateisystem ab - mit revisions</li>
+							</ul>
+						</li>
+						<li>
+							target
+							<ul>
+								<li>enthält die fertige war/s nach dem Build</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+				<h2>Editor</h2>
+				<p>
+					Der Editor ist eine Kopie (teilweise stark komprimiert) des Oryx-Editors. Weshalb ich denke das wir später diesen durch den Oryx ersetzen werden.
+				</p>
+				<p>
+					Der Editor wird durch verschiedene Files konfiguriert. Abgelegt werden diese im configuration Ordner - default.
+					<ul>
+						<li>stencilset.json<li>
+						<li>plugins.xml</li>
+						<li>extensions.json</li>
+					</ul>
+				</p>
+				<h3>stencilsets.json</h3>
+				<p>
+					<em>Beispiel:</em> <br />
+					<code>
+						[<br /> 
+		{<br /> 
+            "title":"Business Process Diagram (BPMN 2.0)",<br /> 
+			"title_de":"Prozessdiagramm (BPMN 2.0)",<br /> 
+            "namespace":"http://b3mn.org/stencilset/bpmn2.0#",<br /> 
+            "description":"BPMN 2.0 stencil set specification for processes.",<br /> 
+            "uri":"/bpmn2.0/bpmn2.0.json",<br /> 
+            "icon_url":"/diagrams/bpmn-22x22.png",<br /> 
+            "visible":true,<br /> 
+			"extensions":[]<br /> 
+        },<br /> 
+		{<br /> 
+            "title":"Test Set",<br /> 
+			"title_de":"Test Set",<br /> 
+            "namespace":"http://b3mn.org/stencilset/testset#",<br /> 
+            "description":"A Testset.",<br /> 
+            "uri":"/testset/testset.json",<br /> 
+            "icon_url":"/diagrams/diagram.png",<br /> 
+            "visible":true,<br /> 
+			"extensions":[]<br /> 
+        }<br /> 
+]
+					</code>
+				</p>
+				<p>
+					<em>Definiton:</em>
+					<ul>
+						<li>title - Titel des Stencilsets</li>
+						<li>title_de - deutscher Titel</li>
+						<li>namespace - Identifier für den Stencilset</li>
+						<li>description</li>
+						<li>uri - pfad zur Definition des Stencilsets relativ zu: editor/data/stencilsets/</li>
+						<li>icon_url - Pfad zum Icon des Stencilsets (wird im Explorer angezeigt) relative zu: explorer/src/img/ </li>
+						<li>visible</li>
+						<li>extensions</li>
+					</ul>
+				</p>
+				<h3>plugins.xml</h3>
+				<p>
+					<code>
+						&lt;?xml version="1.0" encoding="utf-8"?&gt;<br /> 
+&lt;config&gt;<br /> 
+<br /> 
+	&lt;plugins&gt;<br /> 
+		&lt;plugin source="version.js" name="" /&gt;<br /> 
+		&lt;plugin source="signavio.js" name="Signavio.Plugins.Loading" /&gt;<br /> 
+		&lt;!-- following plugins require Ext --&gt;		<br /> 
+		&lt;plugin source="toolbar.js" name="ORYX.Plugins.Toolbar" /&gt;<br /> 
+		&lt;plugin source="shapemenu.js" name="ORYX.Plugins.ShapeMenuPlugin"&gt;<br /> 
+			&lt;property group="Alignment" align="Oryx_Top" /&gt;<br /> 
+			&lt;property group="Edit" align="Oryx_Left" /&gt;					<br /> 
+		&lt;/plugin&gt;<br /> 
+		&lt;plugin source="selectssperspective.js" name="ORYX.Plugins.SelectStencilSetPerspective"&gt;<br /> 
+			&lt;notUsesIn namespace="http://b3mn.org/stencilset/jbpm4#"/&gt;<br /> 
+			&lt;notUsesIn namespace="http://b3mn.org/stencilset/timjpdl3#"/&gt;<br /> 
+		&lt;/plugin&gt;<br /> 
+		...<br /> 
+		&lt;plugin source="bpmn2.0/bpmn2.0.js" name="ORYX.Plugins.BPMN2_0"&gt;<br /> 
+			&lt;requires namespace="http://b3mn.org/stencilset/bpmn2.0#" /&gt;<br /> 
+			&lt;requires namespace="http://www.signavio.com/stencilsets/processmap#" /&gt;<br /> 
+			&lt;requires namespace="http://b3mn.org/stencilset/bpmn2.0choreography#"/&gt;<br /> 
+		&lt;/plugin&gt;<br /> 
+		...<br /> 
+		&lt;/config&gt;
+					</code>
+				</p>
+				<p>
+					<em>Defintion:</em>
+					<ul>
+						<li>
+							plugin
+							<ul>
+								<li>attr:source - Sourcedatein unter editor plugins</li>
+								<li>attr:name - namespace des Plugins</li>
+								<li>notUsesIn - soll nicht für den in namespace genannten Stencilset benutzt werden</li>
+								<li>requires - wird für den in namespace genannten Stencilset benötigt</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

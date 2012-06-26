@@ -1,0 +1,143 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	
+		<title>ibox 3 - Documentation Siginavio Server</title>
+		<link rel="stylesheet" href="../media/css/site.css" type="text/css" media="screen" charset="utf-8" />
+
+	</head>
+	<body>
+		<div>
+			<div id="sidebar">
+				<ul>
+					<li><a href="../index.htm">Home</a></li>
+					<li><a href="index.htm">Home - Signavio</a></li>
+					<li><a href="aufbau.htm">Aufbau</a></li>
+					<li><a href="stencilset_def.htm">Stencilset Definition</a></li>
+				</ul>
+			</div>
+			<div id="content">
+				<h1> Platform </h1>
+				<h2>conf</h2>
+				<p>
+					Konfiguration für classpath und log4j.
+				</p>
+				<h2>lib</h2>
+					<p>Enhält jars für die benutzten Bibliotheken</p>
+				<h2>licences</h2>
+					<p>Enthält die Lizenzen für die Bibliotheken.</p>
+				<h2>src</h2>
+				<h3>editor</h3>
+				namespace: com.signavio.editor
+				<p>
+					<em>Editorhandler</em> Editorseite, vom Editor angefragtes Diagram (Model) ausliefern. <br />
+					<em>Stencilsets</em> Stencilset nach Namespace ausliefern.
+				</p>
+				<h3>explorer</h3>
+				<p>
+					<em>Explorer</em> ausliefern des Explorers.
+				</p>
+				<h3>platform</h3>
+				<ul>
+				<li>
+					account
+					<ul>
+						<li>Usermanagment auf Dateisystemebene</li>
+					</ul>
+				</li>
+				<li>
+					annotations
+					<ul>
+						<li>Annotation für die Handler, Pathhandling etc.</li>
+					</ul>
+				</li>
+				<li>
+					config
+					<ul>
+						<li>Konfiguration - eher ein UserObject.</li>
+					</ul>
+				</li>
+				<li>
+					core
+					<ul>
+						<li>Sammeln aller Handler aus einem Namespace und ihrer Konfiguration</li>
+						<li>Main Platformclass</li>
+					</ul>
+				</li>
+				<li>
+					filters
+					<ul>
+						<li>Filter nach JAVA Servlet API</li>
+						<li>Authenication</li>
+						<li>Handler-Filter - den richtigen Handler für die URL benutzen </li>
+					</ul>
+				</li>
+				<li>
+					handler
+					<ul>
+						<li>Abstract Klassen für die Handler</li>
+					</ul>
+				</li>
+				<li>
+					listeners
+					<ul>
+						<li>ContextListener startet die gesamte Applikation</li>
+					</ul>
+				</li>
+				<li>
+					security
+				</li>
+				<li>
+					servlet
+					<ul>
+						<li>dispatcher servlet - nachdem der HandlerFilter den Handler ermittelt hat ruft dieses Servlet den Handler auf.</li>
+					</ul>
+				</li>
+				<li>
+					tenant
+					<ul>
+						<li>mir nicht ganz sicher - Mieter der Platform werden darüber abgebildet.</li>
+					</ul>
+				</li>
+				<li>
+					test
+					<ul>
+						<li>Kaum Tests.</li>
+					</ul>
+				</li>
+				<li>
+					util
+					<ul>
+						<li>Filesysem utils</li>
+						<li>String utils</li>
+					</ul>
+				</li>
+				</ul>
+				<h4>usermanagment</h4>
+				<p>
+				</p>
+				<h4>warehouse</h4>
+				<p>
+					<em>Namespace: </em> com.signavio.warehouse
+					<ul>
+						<li>buisness</li>
+						<li>direcotry</li>
+						<li>exception</li>
+						<li>
+							model
+							<ul>
+								<li>ModelHandler - hier werden die "Diagramme" (Models) gespeichert -> Ansatzpunkt für Datenkbank und Diagramm Operationen</li>
+							</ul>
+						</li>
+						<li>revision</li>
+						<li>search</li>
+					</ul>
+				</p>
+				<h2>target</h2>
+					<p>Zielverzeichnis des Builds</p>
+				<h2>WebContent</h2>
+					<p>Statischer Content (Webapplication Java conform)</p>
+			</div>
+		</div>
+	</body>
+</html>
